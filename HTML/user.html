@@ -63,13 +63,13 @@
         function openrandompg() {
             const name = document.getElementById("nameInput").value.trim();
             if (name === "") return;
-            const pages = [
-                "dustin.html",
-                "eleven.html",
-                "steve.html",
-                "vecna.html",
-                "mindflayer.html"
-            ];
+           const pages = [
+                    "../characters/dustin.html",
+                    "../characters/eleven.html",
+                    "../characters/steve.html",
+                    "../characters/vecna.html",
+                    "../characters/mindflayer.html"
+                    ];
             const randomIndex = Math.floor(Math.random() * pages.length);
             window.location.href = pages[randomIndex];
             document.getElementById('nameInput').value = '';
