@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Poppins:wght@200;300;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    width: 100%;
+    background-image: url(../assets/login_assets/login\ bg\ 1st\ page.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+.full {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* NAVBAR */
+.nav-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+    padding: 0 40px;
+    z-index: 1000;
+}
+
+.left,
+.right {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-link {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    padding: 10px 0;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: red;
+    transform: scaleX(0);
+    transform-origin: bottom left;
+    transition: transform 0.3s ease-out;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1);
+}
+
+.hamburger {
+    display: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* MAIN CONTENT WRAPPER */
+.character-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 40px 20px 100px 20px;
+}
+
+.character-headers {
+    text-align: center;
+    margin-bottom: 3rem;
+    z-index: 10;
+}
+
+.character-name {
+    color: white;
+    font-size: clamp(36px, 6vw, 80px);
+    font-family: 'Inria Serif', serif;
+    font-weight: 500;
+    text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.5);
+    line-height: 1.1;
+}
+
+.character-class {
+    color: white;
+    font-size: clamp(16px, 2.5vw, 24px);
+    font-family: 'Inria Serif', serif;
+    font-weight: 200;
+    letter-spacing: 2px;
+    margin-top: 10px;
+}
+
+.character-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    position: relative;
+    gap: 40px;
+    z-index: 10;
+}
+
+/* LEFT LOGO */
+.general-info {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.general-info img {
+    height: clamp(80px, 10vw, 120px);
+    width: auto;
+    filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.4));
+}
+
+/* MIDDLE CHARACTER SHOWCASE */
+.middle.character-img {
+    flex: 2;
+    position: relative;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 60vh;
+    min-height: 400px;
+    max-height: 700px;
+    max-width: 500px;
+}
+
+.middle.character-img .hero-image {
+    height: 100%;
+    /* Make character pop out slightly at the top */
+    width: 100%;
+    object-fit: contain;
+    position: absolute;
+    bottom: -5px;
+    /* Stand slightly grounded */
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.8));
+}
+
+/* Specific handling for mindflayer crop */
+.middle.character-img .hero-image.mindflayer {
+    height: 85%;
+    bottom: 5%;
+}
+
+/* RIGHT DESCRIPTION */
+.right-part {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.right-part p {
+    color: white;
+    font-family: 'Inria Serif', serif;
+    font-weight: 400;
+    font-size: clamp(14px, 1.2vw, 16px);
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+.right-part p b {
+    color: red;
+    font-size: 1.1em;
+}
+
+.btn-link {
+    text-decoration: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 50px;
+    width: clamp(160px, 15vw, 210px);
+    font-family: 'Inria Serif', serif;
+    font-size: clamp(18px, 1.5vw, 22px);
+    font-weight: 500;
+    color: white;
+    background-color: rgba(255, 0, 0, 0.8);
+    border: 1px solid red;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: red;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+    transform: scale(1.05);
+}
+
+/* BACKGROUND GLOWS */
+.upper-glow {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40vw;
+    height: 10vh;
+    background: linear-gradient(to bottom, rgba(247, 13, 13, 0.5), rgba(255, 0, 0, 0));
+    border-radius: 50%;
+    filter: blur(20px);
+    z-index: 1;
+}
+
+/* RESPONSIVE DESIGN FOR TABLETS & MOBILES */
+@media (max-width: 992px) {
+    body {
+        background-attachment: scroll;
+        /* fixes zooming issue on iOS */
+    }
+
+    /* Mobile Hamburger Nav */
+    .hamburger {
+        display: block;
+        position: absolute;
+        right: 40px;
+        top: 30px;
+    }
+
+    .nav-group {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 15px;
+        text-align: center;
+    }
+
+    #menu-toggle:checked~.left {
+        display: flex;
+        top: 90px;
+    }
+
+    #menu-toggle:checked~.right {
+        display: flex;
+        top: 240px;
+    }
+
+    /* Layout adjustments */
+    .character-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .general-info {
+        display: none;
+        /* Hide tiny crest on mobile to save space */
+    }
+
+    .middle.character-img {
+        width: 90%;
+        height: 50vh;
+        min-height: 350px;
+    }
+
+    .right-part {
+        width: 90%;
+    }
+}
+
+@media (max-width: 576px) {
+    .character-content-wrapper {
+        padding: 20px 10px 80px 10px;
+    }
+
+    .character-headers {
+        margin-bottom: 2rem;
+    }
+
+    /* Enlarge Headings based on user feedback */
+    .character-name {
+        font-size: clamp(42px, 14vw, 75px);
+    }
+
+    .character-class {
+        font-size: clamp(18px, 6vw, 28px);
+        margin-top: 5px;
+    }
+
+    /* Info detail aligns identically with the container at 80% screen width constraint */
+    .character-container {
+        width: 80%;
+        margin: 0 auto;
+        gap: 20px;
+    }
+
+    .middle.character-img {
+        width: 100%;
+        /* Adapts perfectly inside the 80% container */
+        height: 45vh;
+        min-height: 320px;
+    }
+
+    .middle.character-img .hero-image {
+        height: 95%;
+        width: 100%;
+        bottom: 0px;
+    }
+
+    /* Right part defaults to 100% of the newly restricted 80% container */
+    .right-part {
+        width: 100%;
+        padding: 0;
+    }
+
+    /* Upsize the button purely for mobile */
+    .btn {
+        height: 60px;
+        width: 100%;
+        max-width: 250px;
+        font-size: 26px;
+        padding: 0 15px;
+    }
+}

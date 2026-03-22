@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> stranger thinsg - User </title>
+    <link rel="stylesheet" href="../css/user.css">
+</head>
+
+<body>
+    <div class="full">
+        <!-- NAVBAR -->
+        <nav class="nav-bar">
+            <input type="checkbox" id="menu-toggle" style="display:none;">
+            <label for="menu-toggle" class="hamburger">&#9776;</label>
+
+            <div class="left nav-group">
+                <a href="../index.html" class="nav-link">Story</a>
+                <a href="/HTML/Characters.html" class="nav-link">Characters</a>
+                <a href="/HTML/about-us.html" class="nav-link">About Us</a>
+            </div>
+
+            <div class="center">
+                <!-- Center logo removed here intentionally to match user's original -> wait but original had commented it out. I will leave it empty. -->
+            </div>
+
+            <div class="right nav-group">
+                <a href="/HTML/reviewmain.html" class="nav-link">Review</a>
+                <a href="/HTML/quest.html" class="nav-link">Quest</a>
+                <a href="/HTML/user.html" class="nav-link active">User</a>
+            </div>
+        </nav>
+
+        <div class="upper-glow"></div>
+
+        <div class="center-content-wrapper">
+            <div class="logo-background">
+                <img src="../assets/login_assets/paint_brush_black-removebg-preview.png" alt="">
+            </div>
+
+            <div class="center-logo">
+                <img src="../assets/login_assets/Stranger_Things_logo-removebg-preview.png" alt="">
+            </div>
+
+            <div class="glass-container">
+                <div class="upper-text">
+                    <p>Get Your Character</p>
+                </div>
+                <div class="input">
+                    <input id="nameInput" type="text" placeholder="Enter The Name" required>
+                </div>
+                <button onclick="openrandompg()" class="btn-container" type="submit">
+                    <div class="btn">Click Me!</div>
+                </button>
+            </div>
+        </div>
+
+        <div class="lower-glow"></div>
+    </div>
+
+    <script>
+        function openrandompg() {
+            const name = document.getElementById("nameInput").value.trim();
+            if (name === "") return;
+            const pages = [
+                "dustin.html",
+                "eleven.html",
+                "steve.html",
+                "vecna.html",
+                "mindflayer.html"
+            ];
+            const randomIndex = Math.floor(Math.random() * pages.length);
+            window.location.href = pages[randomIndex];
+            document.getElementById('nameInput').value = '';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,471 @@
+/* BODY BACKGROUND */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #000;
+  background-image: url("../assets/poster.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
+  transition: background-image 0.5s ease-in-out;
+}
+
+/* NAVBAR */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1000;
+}
+
+.left,
+.right {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-link {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  padding: 10px 0;
+  display: inline-block;
+  font-size: 1.1rem;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform 0.3s ease-out;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 45px;
+  transform: translate(-50%, -50%);
+}
+
+.center img {
+  height: clamp(80px, 10vw, 150px);
+}
+
+.hamburger {
+  display: none;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* MAIN LAYOUT */
+.character-ui {
+  display: flex;
+  gap: clamp(20px, 4vw, 60px);
+  padding: clamp(20px, 4vw, 60px);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* HIDE RADIO */
+input[type="radio"] {
+  display: none;
+}
+
+/* LEFT CHARACTER BUTTONS (Desktop) */
+.char-selector {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Dynamic Image Button - Hidden on Desktop */
+.selected-char-btn {
+  display: none;
+  /* hidden on desktop */
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+  margin-bottom: 20px;
+  text-align: center;
+  width: clamp(150px, 15%, 300px);
+}
+
+/* Hide all heads inside the dropdown button by default */
+.selected-char-btn .head {
+  display: none;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid red;
+}
+
+.selected-char-btn .dropdown-arrow {
+  color: white;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+/* Show the active head inside the dynamic dropdown button! */
+#steve:checked~.char-selector .steve-head,
+#dustin:checked~.char-selector .dustin-head,
+#will:checked~.char-selector .will-head,
+#eleven:checked~.char-selector .eleven-head,
+#mike:checked~.char-selector .mike-head,
+#lucas:checked~.char-selector .lucas-head,
+#max:checked~.char-selector .max-head,
+#demogorgan:checked~.char-selector .demogorgan-head,
+#vecna:checked~.char-selector .vecna-head {
+  display: block;
+}
+
+.char-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.5vw, 18px);
+}
+
+.char-buttons img {
+  width: clamp(40px, 4vw, 60px);
+  height: clamp(40px, 4vw, 60px);
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: .3s;
+  border: 2px solid transparent;
+}
+
+.char-buttons img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 12px red;
+  border: 1px solid red;
+}
+
+/* Active Outline Hack for Desktop */
+#steve:checked~.char-selector .char-buttons label[for="steve"] img,
+#dustin:checked~.char-selector .char-buttons label[for="dustin"] img,
+#will:checked~.char-selector .char-buttons label[for="will"] img,
+#eleven:checked~.char-selector .char-buttons label[for="eleven"] img,
+#mike:checked~.char-selector .char-buttons label[for="mike"] img,
+#lucas:checked~.char-selector .char-buttons label[for="lucas"] img,
+#max:checked~.char-selector .char-buttons label[for="max"] img,
+#demogorgan:checked~.char-selector .char-buttons label[for="demogorgan"] img,
+#vecna:checked~.char-selector .char-buttons label[for="vecna"] img {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px red;
+  border: 1px solid red;
+}
+
+/* RIGHT DISPLAY AREA */
+.char-display {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  min-height: 70vh;
+}
+
+/* PANELS */
+.panel {
+  display: none;
+  animation: fade .5s ease;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  gap: 40px;
+}
+
+/* ACTIVE PANEL */
+#steve:checked~.char-display .steve-panel,
+#dustin:checked~.char-display .dustin-panel,
+#will:checked~.char-display .will-panel,
+#eleven:checked~.char-display .eleven-panel,
+#mike:checked~.char-display .mike-panel,
+#lucas:checked~.char-display .lucas-panel,
+#max:checked~.char-display .max-panel,
+#demogorgan:checked~.char-display .demogorgan-panel,
+#vecna:checked~.char-display .vecna-panel {
+  display: flex;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* BIG CHARACTER IMAGE */
+.big-img {
+  width: clamp(200px, 45vw, 550px);
+  height: clamp(300px, 90vh, 700px);
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.1));
+}
+
+/* CHARACTER INFO */
+.character-info {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+  left: 10vw;
+}
+
+/* TITLE */
+.panel h1 {
+  font-size: clamp(32px, 4vw, 60px);
+  color: white;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.5);
+  margin-bottom: 10px;
+}
+
+/* STATS CARD */
+.stats {
+  padding: 20px 28px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 0, 0, .4);
+  box-shadow: 0 0 25px rgba(255, 0, 0, .2);
+  width: 100%;
+  max-width: 500px;
+  color: white;
+}
+
+.stats p {
+  border-bottom: 1px solid rgba(255, 0, 0, .3);
+  padding: 8px 0;
+  font-size: clamp(16px, 1.5vw, 20px);
+}
+
+.stats p:last-child {
+  border-bottom: none;
+}
+
+/* STORY TEXT */
+.story {
+  color: #ccc;
+  width: 100%;
+  max-width: 500px;
+  font-size: clamp(14px, 1.5vw, 18px);
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+footer {
+  position: relative;
+  width: 100%;
+  padding: 15px 0;
+  background: #000;
+  color: #ccc;
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: auto;
+}
+
+/* RESPONSIVE DESIGN FOR TABLETS & MOBILES */
+@media (max-width: 992px) {
+
+  /* Fix iOS mobile background attachment issues */
+  body {
+    background-attachment: scroll;
+    background-position: center top;
+  }
+
+  /* Mobile Hamburger Nav */
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 40px;
+    top: 30px;
+  }
+
+  .nav-group {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 15px;
+    text-align: center;
+  }
+
+  #menu-toggle:checked~.left {
+    display: flex;
+    top: 90px;
+  }
+
+  #menu-toggle:checked~.right {
+    display: flex;
+    top: 240px;
+  }
+
+  /* Layout Adjustments */
+  .character-ui {
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+  }
+
+  /* Dropdown Character Buttons */
+  .char-selector {
+    position: relative;
+    right: 30vw;
+    width: 100%;
+    z-index: 50;
+    align-items: center;
+  }
+
+  .selected-char-btn {
+    display: flex;
+    /* Dynamic image button active! */
+  }
+
+  /* The menu controlled by JS */
+  .char-buttons {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 0, 0, 0.5);
+    gap: 15px;
+    max-height: 50vh;
+    overflow-y: auto;
+    width: clamp(150px, 20%, 300px);
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  }
+
+  /* controlled by JS `show-menu` class */
+  .char-buttons.show-menu {
+    display: flex;
+    animation: fade 0.3s ease;
+  }
+
+  .char-buttons img {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+  }
+
+  /* PANEL (Side-by-Side Mobile Layout) */
+  .panel {
+    display: none;
+    /* Checkbox activates display: flex */
+    flex-direction: row;
+    /* FORCE side-by-side! */
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .big-img {
+    width: 40%;
+    /* Left side image taking 40% */
+    height: auto;
+    object-fit: contain;
+  }
+
+  .character-info {
+    width: 60%;
+    /* Right side info taking 60% */
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .panel h1 {
+    font-size: clamp(20px, 4vw, 36px);
+    margin-bottom: 5px;
+    text-align: left;
+  }
+
+  .stats {
+    padding: 12px 15px;
+    width: 80%;
+    max-width: 80%;
+    min-width: 0;
+  }
+
+  .stats p {
+    font-size: clamp(12px, 2.8vw, 16px);
+    padding: 5px 0;
+  }
+
+  .story {
+    font-size: clamp(11px, 2.5vw, 15px);
+    width: 80%;
+    max-width: 80%;
+    text-align: left;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .selected-char-btn,
+  .char-buttons {
+    width: 30%;
+  }
+
+  .big-img {
+    width: 45%;
+    /* Make more space for text on very small screens */
+  }
+
+  .character-info {
+    width: 55%;
+    position: relative;
+    right: 0vw;
+  }
+
+  .stats {
+    padding: 10px;
+  }
+
+  .panel h1 {
+    font-size: clamp(18px, 10vw, 24px);
+
+  }
+}

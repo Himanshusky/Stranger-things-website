@@ -1,0 +1,371 @@
+/* PRELOADER */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#preloader {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* Red glowing title */
+.loader-title {
+  font-size: 6rem;
+  color: #8b0000;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  animation: flicker 2s infinite alternate;
+  text-shadow:
+    0 0 5px #ff0000,
+    0 0 15px #ff0000,
+    0 0 30px #ff0000,
+    0 0 60px #990000;
+}
+
+/* Flicker animation */
+@keyframes flicker {
+  0% {
+    opacity: 0.3;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0.5;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  80% {
+    opacity: 0.6;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #000;
+  background-image: url("../assets/bg.jpg.jpeg");
+  background-size: 100% auto;
+  /* Scales horizontally, places images on pure black BELOW it */
+  background-position: top center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+}
+
+/* NAVBAR */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1000;
+}
+
+.left,
+.right {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-link {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  padding: 10px 0;
+  display: inline-block;
+  font-size: 1.1rem;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform 0.3s ease-out;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 45px;
+  transform: translate(-50%, -50%);
+}
+
+.center img {
+  height: clamp(80px, 10vw, 150px);
+}
+
+.hamburger {
+  display: none;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* MAIN CONTENT (Scaled absolute positioning) */
+.text {
+  position: relative;
+  width: 100%;
+  height: 80vw;
+  /* Establish a container bounded by screen width proportion */
+}
+
+.date {
+  color: white;
+  font-size: clamp(14px, 1.2vw, 22px);
+  position: absolute;
+  top: 60vw;
+  /* scale of 540px */
+  left: 16vw;
+  /* scale of 300px */
+}
+
+h2 {
+  color: white;
+  font-size: clamp(32px, 5vw, 95px);
+  font-weight: 200;
+  line-height: 1.1;
+  position: absolute;
+  top: 62vw;
+  /* below date */
+  left: 16vw;
+}
+
+#stranger {
+  position: absolute;
+  top: 55vw;
+  /* scale of 800px */
+  left: 55vw;
+  /* scale of 590px */
+  width: clamp(250px, 42vw, 820px);
+  z-index: 5;
+  filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.3));
+}
+
+.mike {
+  position: relative;
+  right: 30vw;
+  display: block;
+  margin: 5vw auto 0;
+  /* Flows naturally below background image */
+  width: clamp(300px, 35vw, 800px);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 60%, rgba(0, 0, 0, 0) 100%);
+  z-index: 2;
+}
+
+/* CAST SECTION */
+.cast {
+  color: white;
+  position: relative;
+  width: 100%;
+  padding: 50px 5%;
+  margin-top: 30px;
+}
+
+.cast-title {
+  text-align: center;
+  margin-bottom: 60px;
+  font-size: clamp(30px, 4vw, 50px);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+.characters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.character {
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease;
+}
+
+.character:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+}
+
+.character img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.name {
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.nick-name {
+  color: #bbb;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+/* Desktop stagger effect */
+@media (min-width: 1024px) {
+  .character:nth-child(1) {
+    transform: translateY(-30px);
+  }
+
+  .character:nth-child(2) {
+    transform: translateY(30px);
+  }
+
+  .character:nth-child(3) {
+    transform: translateY(-15px);
+  }
+
+  .character:nth-child(4) {
+    transform: translateY(30px);
+  }
+
+  .character:nth-child(5) {
+    transform: translateY(-20px);
+  }
+}
+
+footer {
+  position: relative;
+  width: 100%;
+  background: #000;
+  color: #ccc;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 50px;
+  font-size: 1.1rem;
+}
+
+/* RESPONSIVE DESIGN FOR TABLETS & MOBILES */
+@media (max-width: 992px) {
+
+  /* Mobile Hamburger Nav */
+  .hamburger {
+    display: block;
+    position: absolute;
+    right: 40px;
+    top: 30px;
+  }
+
+  .nav-group {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 15px;
+    text-align: center;
+  }
+
+  #menu-toggle:checked~.left {
+    display: flex;
+    top: 90px;
+  }
+
+  #menu-toggle:checked~.right {
+    display: flex;
+    top: 240px;
+    /* Right links stack below left links */
+  }
+
+  /* Adjust layouts */
+  .text {
+    height: 70vw;
+  }
+
+  .date {
+    top: 35vw;
+    left: 10vw;
+  }
+
+  h2 {
+    top: 38vw;
+    left: 10vw;
+  }
+
+  #stranger {
+    top: 55vw;
+    left: 20vw;
+    width: 60vw;
+  }
+
+  .mike {
+    margin-top: 0vw;
+    width: 80vw;
+  }
+}
+
+@media (max-width: 576px) {
+  .text {
+    height: 90vw;
+  }
+
+  .date {
+    top: 50vw;
+    left: 5vw;
+  }
+
+  h2 {
+    top: 56vw;
+    left: 5vw;
+  }
+
+  #stranger {
+    top: 70vw;
+    left: 20vw;
+    width: 80vw;
+  }
+
+  .mike {
+    width: 80vw;
+    margin-top: 25vw;
+  }
+}
